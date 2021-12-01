@@ -1,6 +1,6 @@
 ## Installation
 1. Fork and copy this project
-2. Run "mvn clean package" command
+2. Run "./mvnw clean package" command
 3. Run docker and run following command "docker-compose up -d"  
 ## Usage
 Test data will be created by DataInitializer class at the start of program. There is following data:
