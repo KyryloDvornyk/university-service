@@ -1,0 +1,27 @@
+version: '3.2'
+
+services:
+  db:
+    image: 'postgres:13.3'
+    container_name: postgres_db
+    ports:
+      - "5432"
+    volumes:
+      - ./db-folder:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=postgres_db
+  app:
+    image: university-service:1.0
+    build: ./
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres_db
+    environment:
+      - DB_HOST=postgres_db
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres_db
+    links:
+      - postgres_db
